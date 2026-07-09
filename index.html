@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lokantik Jain — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A4A;
+    --paper:#EDEEE9;
+    --paper-line:#c9ccc3;
+    --brass:#B4802E;
+    --stamp:#8C2F2F;
+    --ink-soft:#4a5670;
+    --card:#F7F7F3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size: 100% 2.1em;
+  }
+  .display{font-family:'Zilla Slab', serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+
+  ::selection{background:var(--brass); color:#fff;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 44px;}
+  @media (max-width:640px){ .wrap{padding:0 24px;} }
+
+  /* ---------- HEADER / NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(237,238,233,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .navrow{
+    max-width:920px; margin:0 auto; padding:16px 44px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  .navrow .brand{font-family:'Zilla Slab', serif; font-weight:700; font-size:1.15rem; letter-spacing:0.02em;}
+  .navrow .brand .no{color:var(--brass); font-family:'IBM Plex Mono', monospace; font-size:0.75rem; margin-right:6px;}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav a{
+    text-decoration:none; font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:500;
+    padding-bottom:4px; border-bottom:1px solid transparent;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--brass); outline:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 70px; position:relative; overflow:hidden; padding-right:160px;}
+  @media (max-width:720px){ .hero{padding-right:0;} }
+  .ledger-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem;
+    color:var(--ink-soft); border:1px solid var(--paper-line);
+    padding:4px 10px; border-radius:2px; background:var(--card);
+    margin-bottom:26px;
+  }
+  .ledger-tag::before{content:"›"; color:var(--brass); font-weight:600;}
+  h1{
+    font-size:clamp(2.4rem, 6vw, 4.1rem);
+    font-weight:700; letter-spacing:-0.01em; line-height:1.12;
+    margin-bottom:22px;
+    max-width:640px;
+  }
+  h1 .accent{color:var(--brass); font-style:italic;}
+  .hero-sub{
+    max-width:560px; font-size:1.08rem; color:var(--ink-soft); margin-bottom:34px;
+  }
+  .hero-actions{display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:0.85rem;
+    padding:12px 22px; border-radius:2px; text-decoration:none;
+    display:inline-block; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper); box-shadow:3px 3px 0 var(--brass);}
+  .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--brass);}
+  .btn-ghost{border:1px solid var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+
+  /* stamp signature element */
+  .stamp{
+    position:absolute; top:64px; right:12px;
+    width:148px; height:148px; border-radius:50%;
+    border:3px solid var(--stamp); color:var(--stamp);
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-14deg);
+    opacity:0.88;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .stamp::before{
+    content:""; position:absolute; inset:8px; border:1px solid var(--stamp); border-radius:50%;
+  }
+  .stamp-text{text-align:center; font-size:0.62rem; letter-spacing:0.14em; line-height:1.5; font-weight:600;}
+  .stamp-text b{display:block; font-size:0.95rem; letter-spacing:0.06em; margin:2px 0;}
+  @media (max-width: 720px){ .stamp{display:none;} }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:64px 0;}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:36px;
+    border-bottom:1px solid var(--ink); padding-bottom:12px;
+  }
+  .section-head .idx{font-family:'IBM Plex Mono', monospace; color:var(--brass); font-size:0.9rem;}
+  .section-head h2{font-family:'Zilla Slab', serif; font-size:1.7rem; font-weight:600;}
+
+  /* ---------- ABOUT / LEDGER SPLIT ---------- */
+  .ledger{
+    display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--ink);
+  }
+  .ledger-col{padding:36px 38px;}
+  .ledger-col + .ledger-col{border-left:1px solid var(--ink);}
+  .ledger-col h3{
+    font-family:'IBM Plex Mono', monospace; text-transform:uppercase; font-size:0.78rem;
+    letter-spacing:0.1em; color:var(--brass); margin-bottom:16px;
+  }
+  .ledger-col p{color:var(--ink-soft); font-size:0.96rem; max-width:38ch;}
+  @media (max-width:640px){ .ledger{grid-template-columns:1fr;} .ledger-col + .ledger-col{border-left:none; border-top:1px solid var(--ink);} }
+
+  /* ---------- EXPERIENCE ---------- */
+  .entry{
+    display:grid; grid-template-columns:150px 1fr; gap:24px;
+    padding:24px 0; border-bottom:1px solid var(--paper-line);
+  }
+  .entry:last-child{border-bottom:none;}
+  .entry .when{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--ink-soft); padding-top:4px;}
+  .entry h3{font-family:'Zilla Slab', serif; font-size:1.2rem; margin-bottom:4px;}
+  .entry .org{color:var(--brass); font-size:0.88rem; font-weight:500; margin-bottom:10px;}
+  .entry ul{padding-left:18px; color:var(--ink-soft); font-size:0.94rem;}
+  .entry li{margin-bottom:6px;}
+  @media (max-width:640px){ .entry{grid-template-columns:1fr; gap:6px;} }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:700px){ .projects-grid{grid-template-columns:1fr;} }
+  .project-card{
+    background:var(--card); border:1px solid var(--paper-line);
+    padding:30px 28px; position:relative; transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .project-card:hover{box-shadow:4px 4px 0 var(--ink); transform:translate(-2px,-2px);}
+  .project-card .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--stamp);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; display:block;
+  }
+  .project-card h3{font-family:'Zilla Slab', serif; font-size:1.15rem; margin-bottom:8px;}
+  .project-card p{color:var(--ink-soft); font-size:0.92rem; margin-bottom:14px;}
+  .stack{display:flex; flex-wrap:wrap; gap:6px;}
+  .stack span{
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem;
+    background:var(--ink); color:var(--paper); padding:3px 8px; border-radius:2px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px;}
+  @media (max-width:700px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-block h4{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--brass); margin-bottom:12px;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:0.85rem; padding:6px 12px; border:1px solid var(--ink);
+    border-radius:2px; background:transparent;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    background:var(--ink); color:var(--paper); padding:56px 0 32px; margin-top:40px;
+  }
+  footer .wrap{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;}
+  footer h2{font-family:'Zilla Slab', serif; font-size:1.9rem; margin-bottom:10px;}
+  footer p{color:#c7cbe0; max-width:420px; font-size:0.95rem;}
+  footer .contact-list{font-family:'IBM Plex Mono', monospace; font-size:0.85rem; line-height:2;}
+  footer .contact-list a{text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.3);}
+  .foot-bottom{
+    max-width:920px; margin:36px auto 0; padding:16px 32px 0; border-top:1px solid rgba(255,255,255,0.15);
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:#8f97b8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navrow">
+    <div class="brand"><span class="no">№ 001</span>Lokantik Jain</div>
+    <nav>
+      <ul>
+        <li><a href="javascript:void(0)" class="js-scroll" data-target="about">About</a></li>
+        <li><a href="javascript:void(0)" class="js-scroll" data-target="experience">Experience</a></li>
+        <li><a href="javascript:void(0)" class="js-scroll" data-target="projects">Projects</a></li>
+        <li><a href="javascript:void(0)" class="js-scroll" data-target="skills">Skills</a></li>
+        <li><a href="javascript:void(0)" class="js-scroll" data-target="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="stamp">
+    <div class="stamp-text">CSE STUDENT<b>&amp;</b>Entrepreneur</div>
+  </div>
+  <div class="ledger-tag">FOLIO / PORTFOLIO — FY 2026</div>
+  <h1>Engineer.<br><span class="accent">Entrepreneur.</span> <br>Builder.</h1>
+  <p class="hero-sub">B.Tech Computer Science student at JNEC, MGM University (2027), who also operates an independent government supply business — sourcing, billing, GST compliance, and client relations, done for real, not simulated for a case study.</p>
+  <div class="hero-actions">
+    <a href="javascript:void(0)" class="btn btn-primary js-scroll" data-target="experience">See the ledger →</a>
+    <a href="javascript:void(0)" class="btn btn-ghost js-scroll" data-target="contact">Get in touch</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="about">
+    <div class="section-head"><span class="idx">01</span><h2>About</h2></div>
+    <div class="ledger">
+      <div class="ledger-col">
+        <h3>Operate</h3>
+        <p>I run a government supply business covering grocery, furniture, stationery, electrical appliances and much more... — handling vendor sourcing, invoicing, GST and tax compliance, and client relationships end to end. It taught me how procurement, pricing and compliance actually work outside a textbook.</p>
+      </div>
+      <div class="ledger-col">
+        <h3>Build</h3>
+        <p>I study Computer Science and build backend-driven systems — invoice automation, database-backed tools, and applications that turn the kind of manual work I do in my business into something faster and more reliable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><span class="idx">02</span><h2>Experience</h2></div>
+
+    <div class="entry">
+      <div class="when">2024 <br>— Present</div>
+      <div>
+        <h3>Proprietor, Government Supply Business</h3>
+        <div class="org">Self-Employed</div>
+        <ul>
+          <li>Supply grocery, furniture, stationery, and electrical appliances to government departments,end-to-end sourcing to delivery management.</li>
+          <li>Prepare quotations,invoices; handle GST and tax compliance for every transaction.</li>
+          <li>Coordinate with suppliers and purchase departments to negotiate pricing and ensure on-time fulfilment.</li>
+          <li>Maintain inventory and financial records using Excel and Tally.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+  <div class="when">2027<br>Batch</div>
+  <div>
+    <h3>B.Tech, Computer Science &amp; Engineering</h3>
+    <div class="org">JNEC, MGM University, Chh.Sambhajinagar</div>
+    <ul>
+      <li>Coursework and team projects spanning backend development, databases, and applied software design.</li>
+      <!-- add your new bullets here, e.g.: -->
+      <li>Relevant coursework: Data Structures & Algorithms, Database Management Systems, Computer Networks.</li>
+      <li>Maintained a CGPA of 8.25 / 10 through [current semester/year].</li>
+      <li>Completed NPTEL certifications in Database Management Systems (DBMS), [DMS full form], Computer Networks (CN), and Cloud Computing (CC).</li>
+<li>Hands-on experience with AWS and cloud computing fundamentals — deploying and managing basic cloud-based resources.</li>
+    </ul>
+  </div>
+</div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head"><span class="idx">03</span><h2>Projects</h2></div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="tag">Team Lead</span>
+        <h3>Invoice &amp; Tax Management System</h3>
+        <p>Led a college team to build a system that generates invoices and automates GST/tax calculations — a digital version of the billing work I handle manually in my own business.</p>
+        <div class="stack"><span>MySQL</span><span>Backend</span><span>Software Design</span><span>OCR application</span></div>
+      </div>
+      <div class="project-card">
+        <span class="tag">Team Lead</span>
+        <h3>Canteen Management System</h3>
+        <p>Directed a team to build an ordering, billing, and inventory system for a canteen — covering the full flow from order placement to stock tracking.</p>
+        <div class="stack"><span>MySQL</span><span>Backend</span><span>Requirement analysis</span><span>Client communication</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><span class="idx">04</span><h2>Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h4>Technical</h4>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">Node.js</span><span class="chip">Java</span>
+          <span class="chip">HTML/CSS</span><span class="chip">MySQL</span><span class="chip">AWS</span>
+          <span class="chip">Cloud Computing</span><span class="chip">AI Tools</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Business &amp; Ops</h4>
+        <div class="chip-row">
+          <span class="chip">Billing &amp; Invoicing</span><span class="chip">GST/Tax Compliance</span>
+          <span class="chip">Vendor Coordination</span><span class="chip">Excel</span><span class="chip">Tally</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Other</h4>
+        <div class="chip-row">
+          <span class="chip">Team Leadership</span><span class="chip">Client Communication</span><span class="chip">MS Word</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Let's connect.</h2>
+      <p>Looking for an internship in operations or business functions at an established organization — ideally one working in manufacturing or sustainability-driven industries — to learn how large-scale operations actually run, and to bring a practical, ground-level understanding of business to the table.</p>
+    </div>
+    <div class="contact-list">
+      <div>[lokantikwork@gmail.com]</div>
+      <div>[7887312351]</div>
+      <div>Chh. Sambhajinagar, Maharashtra</div>
+    </div>
+  </div>
+  <div class="foot-bottom">Lokantik Jain — B.Tech CSE, JNEC MGM University · Portfolio FY2026</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.js-scroll').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.getElementById(el.getAttribute('data-target'));
+      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+</script>
+</body>
+</html>
